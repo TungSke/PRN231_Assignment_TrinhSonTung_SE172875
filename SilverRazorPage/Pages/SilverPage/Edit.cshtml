@@ -1,0 +1,81 @@
+﻿@page
+@model SilverRazorPage.Pages.SilverPage.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    string role = HttpContext.Session.GetString("role");
+    if (role != "1")
+    {
+        Response.Redirect("/Error");
+    }
+}
+
+<div class="container mt-5">
+    <h1 class="text-center text-primary">Edit Silver Jewelry</h1>
+    <h4 class="text-center">Update Item Information</h4>
+    <hr />
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="SilverJewelry.SilverJewelryId" />
+
+                <div class="form-group">
+                    <label asp-for="SilverJewelry.SilverJewelryName" class="control-label"></label>
+                    <input asp-for="SilverJewelry.SilverJewelryName" class="form-control" placeholder="Enter Jewelry Name" />
+                    <span asp-validation-for="SilverJewelry.SilverJewelryName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SilverJewelry.SilverJewelryDescription" class="control-label"></label>
+                    <input asp-for="SilverJewelry.SilverJewelryDescription" class="form-control" placeholder="Enter Description" />
+                    <span asp-validation-for="SilverJewelry.SilverJewelryDescription" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SilverJewelry.MetalWeight" class="control-label"></label>
+                    <input asp-for="SilverJewelry.MetalWeight" class="form-control" placeholder="Enter Metal Weight" />
+                    <span asp-validation-for="SilverJewelry.MetalWeight" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SilverJewelry.Price" class="control-label"></label>
+                    <input asp-for="SilverJewelry.Price" class="form-control" placeholder="Enter Price" />
+                    <span asp-validation-for="SilverJewelry.Price" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SilverJewelry.ProductionYear" class="control-label"></label>
+                    <input asp-for="SilverJewelry.ProductionYear" class="form-control" placeholder="Enter Production Year" />
+                    <span asp-validation-for="SilverJewelry.ProductionYear" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SilverJewelry.CreatedDate" class="control-label"></label>
+                    <input asp-for="SilverJewelry.CreatedDate" class="form-control" value="@DateTime.Now" type="datetime" />
+                    <span asp-validation-for="SilverJewelry.CreatedDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SilverJewelry.CategoryId" class="control-label"></label>
+                    <select asp-for="SilverJewelry.CategoryId" class="form-control" asp-items="@ViewData["Categories"] as SelectList"></select>
+                    <span asp-validation-for="SilverJewelry.CategoryId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-success btn-block" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-4 d-flex justify-content-center">
+        <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

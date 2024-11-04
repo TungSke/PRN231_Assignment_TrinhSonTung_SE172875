@@ -1,0 +1,54 @@
+﻿@page
+@model SilverRazorPage.Pages.SilverPage.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    string role = HttpContext.Session.GetString("role");
+    if (role != "1" && role != "2")
+    {
+        Response.Redirect("/Error");
+    }
+}
+
+<div class="container mt-5">
+    <h1 class="text-center text-primary">Silver Jewelry Details</h1>
+    <hr />
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h4 class="card-title">Item Information</h4>
+            <dl class="row">
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayNameFor(model => model.SilverJewelry.SilverJewelryName)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.SilverJewelry.SilverJewelryName)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayNameFor(model => model.SilverJewelry.SilverJewelryDescription)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.SilverJewelry.SilverJewelryDescription)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayNameFor(model => model.SilverJewelry.MetalWeight)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.SilverJewelry.MetalWeight)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayNameFor(model => model.SilverJewelry.Price)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.SilverJewelry.Price)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayNameFor(model => model.SilverJewelry.ProductionYear)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.SilverJewelry.ProductionYear)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayNameFor(model => model.SilverJewelry.CreatedDate)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.SilverJewelry.CreatedDate)</dd>
+
+                <dt class="col-sm-3 font-weight-bold">@Html.DisplayNameFor(model => model.SilverJewelry.Category)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.SilverJewelry.Category.CategoryId)</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="mt-4 d-flex justify-content-center">
+        <a asp-page="./Edit" asp-route-id="@Model.SilverJewelry.SilverJewelryId" class="btn btn-warning me-2">Edit</a>
+        <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
